@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">MoviesDB</string>
+    <string name="movie_title">Movie Title</string>
+    <string name="filter">filter</string>
+    <string name="movies">Movies</string>
+    <string name="series">Series</string>
+    <string name="episode">Episode</string>
+</resources>

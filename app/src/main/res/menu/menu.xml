@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/search"
+        android:icon="@drawable/ic_search_white_24dp"
+        android:orderInCategory="1"
+        android:title="@string/movie_title"
+        app:actionViewClass="androidx.appcompat.widget.SearchView"
+        app:showAsAction="always|collapseActionView" />
+
+    <item
+        android:id="@+id/filter"
+        android:icon="@drawable/ic_filter_list_white_24dp"
+        android:orderInCategory="2"
+        android:title="@string/filter"
+        app:showAsAction="ifRoom">
+        <menu>
+            <group android:id="@+id/group" android:checkableBehavior="single">
+                <item
+                    android:id="@+id/movies"
+                    android:title="@string/movies"
+                    android:visible="true"
+                    app:showAsAction="ifRoom"
+                    android:checkable="true"
+                    />
+
+                <item
+                    android:id="@+id/series"
+                    android:title="@string/series"
+                    app:showAsAction="always"
+                    android:checkable="true"
+                    android:visible="true" />
+
+                <item
+                    android:id="@+id/episode"
+                    android:title="@string/episode"
+                    android:checkable="true"
+                    android:visible="true"/>
+            </group>
+        </menu>
+    </item>
+</menu>
