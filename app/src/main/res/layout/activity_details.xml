@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="15dp"
+        tools:context=".ui.details.DetailsActivity">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/poster"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:adjustViewBounds="true"
+            android:scaleType="fitXY"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@drawable/poster" />
+
+        <TextView
+            android:id="@+id/txtTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:fontFamily="@font/slabo"
+            android:gravity="center"
+            android:textColor="@android:color/background_dark"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/poster"
+            app:layout_constraintTop_toTopOf="@id/poster"
+            tools:text="Guardians of Galaxy" />
+
+        <TextView
+            android:id="@+id/year"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/slabo"
+            android:gravity="center"
+            android:textSize="16sp"
+            android:textStyle="normal"
+            app:layout_constraintEnd_toStartOf="@+id/rating"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@id/poster"
+            app:layout_constraintStart_toStartOf="@id/txtTitle"
+            app:layout_constraintTop_toBottomOf="@id/txtTitle"
+            tools:text="2014" />
+
+        <TextView
+            android:id="@+id/rating"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/slabo"
+            android:gravity="center"
+            android:textSize="16sp"
+            android:textStyle="normal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/year"
+            app:layout_constraintTop_toTopOf="@id/year"
+            tools:text="6.9" />
+
+        <TextView
+            android:id="@+id/genre"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/slabo"
+            android:gravity="center"
+            android:textSize="16sp"
+            android:textStyle="normal"
+            app:layout_constraintBottom_toBottomOf="@id/poster"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/txtTitle"
+            tools:text="Drama, Sci-Fi, Thriller" />
+
+        <TextView
+            android:id="@+id/plot"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/slabo"
+            android:textColor="@android:color/background_dark"
+            android:textSize="14sp"
+            android:textStyle="normal"
+            app:layout_constraintTop_toBottomOf="@id/poster"
+            tools:text="Engineers Aaron, Abe, Robert and Phillip are working on an invention, the prototype being built in Aaron's garage. This project is beyond their day jobs. The project truly does belong to Aaron and Abe, as they use all their free time working on it, primarily trying to overcome the many engineering related problems they've encountered. It is during one of his tests with the invention running that Abe discovers that a protein inside the main unit has multiplied much more rapidly than it could in nature. Rather than the invention being a protein super incubator, Abe, using himself as a guinea pig, and a very meticulous one at that, discovers that the invention can be used as a time machine. In his self experiment, Abe was especially careful not to interfere with his own self in that time warp. Abe passes along this discovery to Aaron, who he expects will tell his wife Kara in what is the sanctity of their marriage, but he doesn't want to tell either Robert or Phillip. Much to Abe's surprise, Aaron does not want to tell Kara, it being a sole intellectual property of just the two of them, in the process moving the base of operation to a locked storage unit. Aaron's plan for the two of them is to use the invention to win big in the stock market by knowing through the time travel what has happened in the market. With two thoughts on the matter now instead of just one, Aaron and Abe may hit some logistical and philosophical roadblocks in how to move forward." />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

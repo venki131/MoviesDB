@@ -1,7 +1,8 @@
-package com.example.moviesdb.ui
+package com.example.moviesdb.ui.search
 
 import android.app.SearchManager
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.View
@@ -12,6 +13,9 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.RecyclerView
 import com.example.moviesdb.R
 import com.example.moviesdb.data.model.Search
+import com.example.moviesdb.ui.MovieSearchViewModelFactory
+import com.example.moviesdb.ui.details.DetailsActivity
+import com.example.moviesdb.ui.search.adapters.MoviesListAdapter
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -22,7 +26,8 @@ import org.kodein.di.android.closestKodein
 import org.kodein.di.generic.instance
 
 
-class MainActivity : AppCompatActivity(), KodeinAware {
+class MainActivity : AppCompatActivity(), KodeinAware,
+    MoviesListAdapter.ClickCallback {
 
     override val kodein by closestKodein()
     private val job = Job()
@@ -46,12 +51,14 @@ class MainActivity : AppCompatActivity(), KodeinAware {
         return super.onCreateOptionsMenu(menu)
     }
 
+    private var searchList : List<Search> = listOf()
     private fun bindUI() = uiScope.launch {
         val searchResult = viewModel.searchResults.await()
 
         searchResult.observe(this@MainActivity, Observer {
             if (it == null) return@Observer
             initRecyclerView(it.search)
+            searchList = it.search
             progressCircular.visibility = View.GONE
             txtSearchMovie.visibility = View.GONE
             println("Debug : desc = ${it.search}")
@@ -61,7 +68,12 @@ class MainActivity : AppCompatActivity(), KodeinAware {
 
     private fun initRecyclerView(result: List<Search>) {
         val recyclerView = findViewById<RecyclerView>(R.id.recyclerView)
-        val adapter = MoviesListAdapter(result, this)
+        val adapter =
+            MoviesListAdapter(
+                result,
+                this,
+                this
+            )
         recyclerView.adapter = adapter
     }
 
@@ -93,5 +105,11 @@ class MainActivity : AppCompatActivity(), KodeinAware {
     override fun onDestroy() {
         job.cancel()
         super.onDestroy()
+    }
+
+    override fun onClick(position: Int) {
+        intent = Intent(this, DetailsActivity::class.java)
+        intent.putExtra("Title", searchList[position].title)
+        startActivity(intent)
     }
 }

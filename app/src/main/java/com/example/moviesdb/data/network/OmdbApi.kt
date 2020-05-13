@@ -1,6 +1,7 @@
 package com.example.moviesdb.data.network
 
 import com.example.moviesdb.BuildConfig
+import com.example.moviesdb.data.model.DetailsResponseModel
 import com.example.moviesdb.data.model.MoviesSearchResponseModel
 import com.example.moviesdb.utils.UrlConstant
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
@@ -31,7 +32,8 @@ interface OmdbApi {
                 val url = it.request()
                     .url
                     .newBuilder()
-                    .addQueryParameter("apikey",
+                    .addQueryParameter(
+                        "apikey",
                         BuildConfig.API_KEY
                     )
                     .build()
@@ -61,4 +63,10 @@ interface OmdbApi {
                 .create(OmdbApi::class.java)
         }
     }
+
+    @GET(UrlConstant.DETAILS_API)
+    fun getDetails(
+        @Query("plot") type: String,
+        @Query("t") searchTitle: String
+    ): Deferred<DetailsResponseModel>
 }

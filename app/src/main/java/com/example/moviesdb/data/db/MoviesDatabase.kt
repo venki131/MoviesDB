@@ -5,11 +5,12 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
+import com.example.moviesdb.data.model.DetailsResponseModel
 import com.example.moviesdb.data.model.MoviesSearchResponseModel
 import com.example.moviesdb.utils.SearchConverter
 
 @Database(
-    entities = [MoviesSearchResponseModel::class],
+    entities = [MoviesSearchResponseModel::class, DetailsResponseModel::class],
     version = 1,
     exportSchema = false
 )

@@ -11,5 +11,8 @@ interface MoviesRepository {
         searchTitle: String
     ): LiveData<MoviesSearchResponseModel>
 
-    suspend fun getDetails(): LiveData<DetailsResponseModel>
+    suspend fun getDetails(
+        plot : String,
+        movieTitle : String
+    ) : LiveData<DetailsResponseModel>
 }

@@ -19,6 +19,10 @@ class MoviesRepositoryImpl(
         getSearchResultsDataSource.downloadedSearchResult.observeForever {
             persistFetchedResult(it)
         }
+
+        getSearchResultsDataSource.downloadedDetails.observeForever {
+            persistDetails(it)
+        }
     }
 
     override suspend fun getSearchResults(
@@ -32,13 +36,25 @@ class MoviesRepositoryImpl(
         }
     }
 
-    override suspend fun getDetails(): LiveData<DetailsResponseModel> {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    override suspend fun getDetails(
+        plot: String,
+        movieTitle: String
+    ): LiveData<DetailsResponseModel> {
+        getSearchResultsDataSource.getDetails(plot, movieTitle)
+        return withContext(Dispatchers.IO) {
+            return@withContext moviesSearchResultDao.getMovieDetails()
+        }
     }
 
     private fun persistFetchedResult(fetchedResultDao: MoviesSearchResponseModel) {
         GlobalScope.launch(Dispatchers.IO) {
             moviesSearchResultDao.upsert(fetchedResultDao)
+        }
+    }
+
+    private fun persistDetails(fetchedDetails: DetailsResponseModel) {
+        GlobalScope.launch(Dispatchers.IO) {
+            moviesSearchResultDao.insertOrUpdateDetails(fetchedDetails)
         }
     }
 }

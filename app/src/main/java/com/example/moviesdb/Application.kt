@@ -33,5 +33,9 @@ open class Application : Application(), KodeinAware {
             MovieSearchViewModelFactory(instance())
         }
 
+        /*bind() from provider {
+            DetailsViewModelFactory(instance())
+        }*/
+
     }
 }
