@@ -1,8 +1,9 @@
-package com.example.moviesdb.model
+package com.example.moviesdb.data.model
 
-
+import androidx.room.Entity
 import com.google.gson.annotations.SerializedName
 
+//@Entity(tableName = "movie_details")
 data class DetailsResponseModel(
     @SerializedName("Actors")
     val actors: String,
