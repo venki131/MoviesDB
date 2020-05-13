@@ -13,7 +13,7 @@ android {
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"
-
+        buildConfigField "String", "BASE_URL", '"'+project.property('baseUrl')+'"'
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 

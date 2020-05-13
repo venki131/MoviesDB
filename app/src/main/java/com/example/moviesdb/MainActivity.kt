@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.Menu
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
+import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.activity_main.*
 
 
@@ -15,6 +16,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         initSearch()
+        initRecyclerView(/*listOf()*/)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -23,6 +25,12 @@ class MainActivity : AppCompatActivity() {
             subMenu.item.isChecked = true
         }
         return super.onCreateOptionsMenu(menu)
+    }
+
+    private fun initRecyclerView(/*sortedBakersList: List<BakersResponseModel>*/) {
+        val recyclerView = findViewById<RecyclerView>(R.id.recyclerView)
+        val adapter = MoviesListAdapter()
+        recyclerView.adapter = adapter
     }
 
     private fun initSearch() {

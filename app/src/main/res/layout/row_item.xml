@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    app:cardUseCompatPadding="true"
     android:elevation="4dp"
     app:cardCornerRadius="6dp">
 
@@ -18,10 +19,11 @@
             android:adjustViewBounds="true"
             android:background="?attr/selectableItemBackgroundBorderless"
             android:clickable="true"
-            android:scaleType="fitXY"
+            android:scaleType="centerCrop"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:src="@mipmap/ic_launcher_round" />
+            android:src="@drawable/poster"
+            android:focusable="true" />
 
         <TextView
             android:id="@+id/txtMovieTitle"
@@ -30,13 +32,15 @@
             android:layout_marginTop="10dp"
             android:fontFamily="@font/slabo"
             android:gravity="center"
+            android:textColor="@android:color/background_dark"
             android:textAllCaps="false"
             android:textSize="16sp"
             android:textStyle="normal"
+            android:padding="5dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/imgAlbumCover"
-            tools:text="Guardians of the Galaxy" />
+            android:text="Guardians of the Galaxy" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>
