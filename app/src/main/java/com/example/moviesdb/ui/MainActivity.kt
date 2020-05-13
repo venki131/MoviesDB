@@ -4,12 +4,14 @@ import android.app.SearchManager
 import android.content.Context
 import android.os.Bundle
 import android.view.Menu
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.RecyclerView
 import com.example.moviesdb.R
+import com.example.moviesdb.data.model.Search
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -34,7 +36,6 @@ class MainActivity : AppCompatActivity(), KodeinAware {
         viewModel = ViewModelProviders.of(this, viewModelFactory)
             .get(MainViewModel::class.java)
         initSearch()
-        initRecyclerView()
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -50,14 +51,17 @@ class MainActivity : AppCompatActivity(), KodeinAware {
 
         searchResult.observe(this@MainActivity, Observer {
             if (it == null) return@Observer
-
-            println("Debug : desc = ${it.poster}")
+            initRecyclerView(it.search)
+            progressCircular.visibility = View.GONE
+            txtSearchMovie.visibility = View.GONE
+            println("Debug : desc = ${it.search}")
         })
+
     }
 
-    private fun initRecyclerView() {
+    private fun initRecyclerView(result: List<Search>) {
         val recyclerView = findViewById<RecyclerView>(R.id.recyclerView)
-        val adapter = MoviesListAdapter()
+        val adapter = MoviesListAdapter(result, this)
         recyclerView.adapter = adapter
     }
 
@@ -71,6 +75,9 @@ class MainActivity : AppCompatActivity(), KodeinAware {
         searchItem.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 if (query?.length!! >= 3) {
+                    progressCircular.visibility = View.VISIBLE
+                    txtSearchMovie.visibility = View.GONE
+                    viewModel.getSearchInputs("movie", query)
                     bindUI()
                 }
                 searchItem.clearFocus()

@@ -12,7 +12,7 @@ import kotlinx.coroutines.withContext
 
 class MoviesRepositoryImpl(
     private val moviesSearchResultDao: MoviesSearchResultDao,
-    getSearchResultsDataSource: GetSearchResultsDataSource
+    private val getSearchResultsDataSource: GetSearchResultsDataSource
 ) : MoviesRepository {
 
     init {
@@ -26,6 +26,7 @@ class MoviesRepositoryImpl(
         page: Int,
         searchTitle: String
     ): LiveData<MoviesSearchResponseModel> {
+        getSearchResultsDataSource.getSearchResult(type, page, searchTitle)
         return withContext(Dispatchers.IO) {
             return@withContext moviesSearchResultDao.getMovieResult()
         }

@@ -5,16 +5,15 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
-import com.example.moviesdb.data.model.DetailsResponseModel
 import com.example.moviesdb.data.model.MoviesSearchResponseModel
-import com.example.moviesdb.utils.Converters
+import com.example.moviesdb.utils.SearchConverter
 
 @Database(
-    entities = [MoviesSearchResponseModel::class/*, DetailsResponseModel::class*/],
+    entities = [MoviesSearchResponseModel::class],
     version = 1,
     exportSchema = false
 )
-@TypeConverters(Converters::class)
+@TypeConverters(SearchConverter::class)
 abstract class MoviesDatabase : RoomDatabase() {
     abstract fun movieSearchResultDao(): MoviesSearchResultDao
 
@@ -32,6 +31,7 @@ abstract class MoviesDatabase : RoomDatabase() {
                 context.applicationContext,
                 MoviesDatabase::class.java,
                 "movies.db"
-            ).build()
+            ).fallbackToDestructiveMigration()
+                .build()
     }
 }

@@ -5,4 +5,5 @@
     <string name="movies">Movies</string>
     <string name="series">Series</string>
     <string name="episode">Episode</string>
+    <string name="search_for_movies">Search for Movies</string>
 </resources>

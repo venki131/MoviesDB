@@ -1,9 +1,12 @@
 package com.example.moviesdb.data.model
 
 import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 
-//@Entity(tableName = "movie_details")
+const val CURRENT_DETAILS_ID = 0
+
+@Entity(tableName = "movie_details")
 data class DetailsResponseModel(
     @SerializedName("Actors")
     val actors: String,
@@ -37,8 +40,8 @@ data class DetailsResponseModel(
     val production: String,
     @SerializedName("Rated")
     val rated: String,
-    @SerializedName("Ratings")
-    val ratings: List<Rating>,
+    /*@SerializedName("Ratings")
+    val ratings: List<Rating>,*/
     @SerializedName("Released")
     val released: String,
     @SerializedName("Response")
@@ -55,4 +58,7 @@ data class DetailsResponseModel(
     val writer: String,
     @SerializedName("Year")
     val year: String
-)
+){
+    @PrimaryKey(autoGenerate = false)
+    var id: Int = CURRENT_DETAILS_ID
+}

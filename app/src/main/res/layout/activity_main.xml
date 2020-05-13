@@ -18,20 +18,38 @@
         app:popupTheme="@style/ActionBarPopupThemeOverlay"
         app:title="@string/app_name" />
 
+    <TextView
+        android:id="@+id/txtSearchMovie"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/slabo"
+        android:text="@string/search_for_movies"
+        android:textColor="@android:color/background_dark"
+        android:textSize="24sp"
+        android:gravity="center"
+        android:elevation="6dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:clipToPadding="false"
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/toolbar"
         app:spanCount="3"
-        tools:itemCount="20"
-        tools:listitem="@layout/row_item" />
+        />
 
     <ProgressBar
-        android:id="@+id/progress_circular"
+        android:id="@+id/progressCircular"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
