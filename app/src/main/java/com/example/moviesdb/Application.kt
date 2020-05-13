@@ -22,7 +22,7 @@ open class Application : Application(), KodeinAware {
         bind() from singleton { instance<MoviesDatabase>().movieSearchResultDao() }
         bind<ConnectivityInterceptor>() with singleton { ConnectivityInterceptorImpl(instance()) }
         bind() from singleton { OmdbApi(instance()) }
-        bind<GetSearchResults>() with singleton { GetSearchResultsImpl(instance()) }
+        bind<GetSearchResultsDataSource>() with singleton { GetSearchResultsDataSourceImpl(instance()) }
         bind<MoviesRepository>() with singleton {
             MoviesRepositoryImpl(
                 instance(),

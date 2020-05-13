@@ -18,7 +18,6 @@ interface OmdbApi {
 
     fun getSearchResults(
         @Query("type") type: String,
-        @Query("apikey") apiKey: String,
         @Query("page") page: Int,
         @Query("s") searchTitle: String
     ): Deferred<MoviesSearchResponseModel>
@@ -32,7 +31,7 @@ interface OmdbApi {
                 val url = it.request()
                     .url
                     .newBuilder()
-                    .addQueryParameter("access_key",
+                    .addQueryParameter("apikey",
                         BuildConfig.API_KEY
                     )
                     .build()

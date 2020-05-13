@@ -5,9 +5,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.moviesdb.data.model.MoviesSearchResponseModel
 
-class GetSearchResultsImpl(
+class GetSearchResultsDataSourceImpl(
     private val omdbApi: OmdbApi
-) : GetSearchResults {
+) : GetSearchResultsDataSource {
 
     private val _downloadedSearchResult = MutableLiveData<MoviesSearchResponseModel>()
 
@@ -16,13 +16,12 @@ class GetSearchResultsImpl(
 
     override suspend fun getSearchResult(
         type: String,
-        apiKey: String,
         page: Int,
         searchTitle: String
     ) {
         try {
             val fetchSearchResults = omdbApi.getSearchResults(
-                type, apiKey, page, searchTitle
+                type, page, searchTitle
             ).await()
 
             _downloadedSearchResult.postValue(fetchSearchResults)

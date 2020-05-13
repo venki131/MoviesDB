@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import com.example.moviesdb.data.db.MoviesSearchResultDao
 import com.example.moviesdb.data.model.DetailsResponseModel
 import com.example.moviesdb.data.model.MoviesSearchResponseModel
-import com.example.moviesdb.data.network.GetSearchResults
+import com.example.moviesdb.data.network.GetSearchResultsDataSource
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -12,18 +12,17 @@ import kotlinx.coroutines.withContext
 
 class MoviesRepositoryImpl(
     private val moviesSearchResultDao: MoviesSearchResultDao,
-    getSearchResults: GetSearchResults
+    getSearchResultsDataSource: GetSearchResultsDataSource
 ) : MoviesRepository {
 
     init {
-        getSearchResults.downloadedSearchResult.observeForever {
+        getSearchResultsDataSource.downloadedSearchResult.observeForever {
             persistFetchedResult(it)
         }
     }
 
     override suspend fun getSearchResults(
         type: String,
-        apiKey: String,
         page: Int,
         searchTitle: String
     ): LiveData<MoviesSearchResponseModel> {
