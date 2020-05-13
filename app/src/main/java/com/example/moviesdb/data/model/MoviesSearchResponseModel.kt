@@ -16,7 +16,11 @@ class MoviesSearchResponseModel(
     @SerializedName("Search")
     val search: List<Search> = listOf(),
     @SerializedName("totalResults")
-    val totalResults: String
+    val totalResults: String,
+    @SerializedName("Response")
+    val failResponse: String,
+    @SerializedName("Error")
+    val error : String
 ) {
     @PrimaryKey(autoGenerate = false)
     var id: Int = CURRENT_ID

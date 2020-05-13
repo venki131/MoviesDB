@@ -51,13 +51,12 @@ class MainActivity : AppCompatActivity(), KodeinAware,
         return super.onCreateOptionsMenu(menu)
     }
 
-    private var searchList : List<Search> = listOf()
+    private var searchList: List<Search> = listOf()
     private fun bindUI() = uiScope.launch {
         val searchResult = viewModel.searchResults.await()
 
         searchResult.observe(this@MainActivity, Observer {
             if (it == null) return@Observer
-            initRecyclerView(it.search)
             searchList = it.search
             progressCircular.visibility = View.GONE
             txtSearchMovie.visibility = View.GONE
@@ -66,12 +65,15 @@ class MainActivity : AppCompatActivity(), KodeinAware,
 
     }
 
-    private fun initRecyclerView(result: List<Search>) {
+    fun initViews() {
+        initRecyclerView()
+    }
+
+    private lateinit var adapter: MoviesListAdapter
+    private fun initRecyclerView() {
         val recyclerView = findViewById<RecyclerView>(R.id.recyclerView)
-        val adapter =
+        adapter =
             MoviesListAdapter(
-                result,
-                this,
                 this
             )
         recyclerView.adapter = adapter
@@ -90,7 +92,10 @@ class MainActivity : AppCompatActivity(), KodeinAware,
                     progressCircular.visibility = View.VISIBLE
                     txtSearchMovie.visibility = View.GONE
                     viewModel.getSearchInputs("movie", query)
-                    bindUI()
+                    viewModel.moviesRefresh("movie", query)
+                    //bindUI()
+                    initViews()
+                    initViewModel()
                 }
                 searchItem.clearFocus()
                 return true
@@ -107,9 +112,22 @@ class MainActivity : AppCompatActivity(), KodeinAware,
         super.onDestroy()
     }
 
-    override fun onClick(position: Int) {
+    private fun initViewModel() {
+        viewModel.isLoading.observeForever {
+            if (it != null)
+                progressCircular.visibility = if (it) View.VISIBLE else View.GONE
+
+        }
+        viewModel.moviesPagedList.observeForever {
+            if (it != null)
+                adapter.submitList(it)
+            progressCircular.visibility = View.GONE
+        }
+    }
+
+    override fun onClick(search: Search) {
         intent = Intent(this, DetailsActivity::class.java)
-        intent.putExtra("Title", searchList[position].title)
+        intent.putExtra("Title", search.title)
         startActivity(intent)
     }
 }

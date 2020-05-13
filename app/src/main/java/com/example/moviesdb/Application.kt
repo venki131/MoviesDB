@@ -30,12 +30,7 @@ open class Application : Application(), KodeinAware {
             )
         }
         bind() from provider {
-            MovieSearchViewModelFactory(instance())
+            MovieSearchViewModelFactory(instance(), instance())
         }
-
-        /*bind() from provider {
-            DetailsViewModelFactory(instance())
-        }*/
-
     }
 }
